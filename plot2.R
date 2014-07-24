@@ -1,0 +1,6 @@
+NEI <- readRDS("summarySCC_PM25.rds")
+bNEI <- subset(NEI,fips == "24510")
+agg <- aggregate(bNEI[,c("Emissions")], list(bNEI$year), sum)
+plot2 <- png("plot2.png", width=480, height = 480)
+with(agg,plot(Group.1,x, type="o",xlab="year",ylab="PM2.5"))
+dev.off()

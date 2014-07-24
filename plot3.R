@@ -1,0 +1,7 @@
+NEI <- readRDS("summarySCC_PM25.rds")
+bNEI <- subset(NEI,fips == "24510")
+agg <- aggregate(bNEI[,c("Emissions")], list(bNEI$type,bNEI$year), sum)
+plot3 <- png("plot3.png", width=480, height = 480)
+names(agg) <- c("type","year","Emissions")
+qplot(year,Emissions,data = agg,facets=. ~ type, geom = c("point","smooth"))
+dev.off()
